@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Firebase App</title>
+    <title>Velvet ChatBox</title>
 </head>
 <!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
@@ -10,11 +10,11 @@
 <!-- AngularFire -->
 <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
     <body ng-app="app">
-        <h1>Firebase chatbox</h1>
+        <h1>A warm welcome from Velvet</h1>
         
         <div ng-controller="chatCtrl">
             <div id="chatBox" style="padding: 10px; border: black 1px solid">
-                <h1>Chat box</h1>
+                <h1>Discussion</h1>
                 <div ng-repeat="chatMessage in chatMessages">
                     <span style="font-weight: bold">{{chatMessage.name}}</span>
                      : <span>{{chatMessage.message}}</span> | <a ng-click="delete(chatMessage)" href="#">X</a>
@@ -40,7 +40,7 @@
             $scope.chatMes = "";
             $scope.message = "Hello";
 
-            var ref = new Firebase("https://amber-torch-2590.firebaseio.com/");
+            var ref = new Firebase("https://amber-torch-2634.firebaseio.com/");
             var sync = $firebase(ref);
             $scope.chatMessages = sync.$asArray();
 
