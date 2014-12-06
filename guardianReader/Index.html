@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="readerApp">
+<head>
+    <title>Guardian Reader Single Page App</title>
+
+    <link href="boostrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="boostrap/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="custom.css" rel="stylesheet">
+</head>
+<body ng-controller="mainCtrl as ctrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Guardian Reader</a>
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{active: ctrl.isInSection('home')}"><a href="#">Home</a></li>
+                    <li ng-class="{active: ctrl.isInSection('news')}"><a href="#/section/news">News</a>         </li>
+                    <li ng-class="{active: ctrl.isInSection('travel')}"><a href="#/section/travel">Travel</a>     </li>
+                    <li ng-class="{active: ctrl.isInSection('sport')}"><a href="#/section/sport">Sport</a>       </li>
+                    <li ng-class="{active: ctrl.isInSection('culture')}"><a href="#/section/culture">Culture</a>   </li>
+                    <li ng-class="{active: ctrl.isInSection('business')}"><a href="#/section/business">Business</a> </li>
+                </ul>
+                <form class="navbar-form navbar-right" role="form">
+                    <div class="form-group">
+                        <input type="text" ng-model="searchText" placeholder="" class="form-control">
+                    </div>
+                    <button type="submit" ng-click="ctrl.search()" class="btn btn-success">Search</button>
+                </form>
+            </div><!--/.navbar-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron text-center">
+            <h1>Velvet Guardian Reader</h1>
+            <p>simple news reader using the API of guardian.co.uk</p>
+        </div>
+
+        <div class="list-group" ng-view></div>
+
+        <hr>
+        <footer>
+            <p>&copy; Copyright by Minh Bao Hoang 2014</p>
+        </footer>
+    </div> <!-- /container -->
+</body>
+
+
+</html>
+
+<script type="text/ng-template" id="newsDivTmpl">
+    <div ng-repeat="article in articles" class="list-group-item">
+        <div class="media col-md-2">
+            <figure class="pull-left">
+                <img class="img-responsive max-height-100" src="http://placehold.it/150x90"
+                     ng-src="{{article.fields.thumbnail}}"
+                     alt="placehold.it/350x250">
+            </figure>
+        </div>
+        <div class="col-md-8 max-height-100">
+            <h4 class="list-group-item-heading">{{article.fields.headline}} (<a ng-href="{{article.webUrl}}" target="_blank">Read more</a>)</h4>
+            <p class="list-group-item-text" ng-bind-html="article.fields.trailText"></p>
+
+        </div>
+        <div class="col-md-2 text-center">
+            <a style="margin-top: 30px" ng-click="ctrl.openTwitter(article)" href="#" class="btn btn-default btn-block">
+                <img src="Twitter_bird_icon.png" height="20" width="20" />
+                Tweet
+            </a>
+        </div>
+    </div>
+    <div ng-show="isAddShow" class="list-group-item text-center" style="min-height: 55px">
+        <button ng-click="ctrl.addArticles()" class=" btn btn-lg btn-block btn-success">More articles (Page {{response.currentPage}}/{{response.pages}})</button>
+    </div>
+</script>
+
+
+<script src="jquery/jquery-2.1.1.js"></script>
+<script src="boostrap/js/bootstrap.js"></script>
+<script src="angularjs/angular.js"></script>
+<script src="angularjs/angular-sanitize.js"></script>
+<script src="angularjs/angular-route.js"></script>
+<script src="app.js"></script>
+<script src="controller.js"></script>
+<script src="config.js"></script>
